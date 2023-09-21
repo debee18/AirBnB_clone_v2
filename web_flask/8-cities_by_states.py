@@ -1,18 +1,22 @@
 #!/usr/bin/python3
-"""Flask web application to display a list of states."""
+"""Flask web application to display states and their cities."""
 from flask import Flask, render_template
 from models import storage
 from models.state import State
+from models.city import City
 
 app = Flask(__name__)
 
 
-@app.route('/states_list', strict_slashes=False)
-def states_list():
-    """Display a list of states."""
+@app.route('/cities_by_states', strict_slashes=False)
+def cities_by_states():
+    """Display a list of states and their cities."""
     states = storage.all(State)
     sorted_states = sorted(states.values(), key=lambda x: x.name)
-    return render_template('7-states_list.html', states=sorted_states)
+    cities = storage.all(City)
+    sorted_cities = sorted(cities.values(), key=lambda x: x.name)
+
+    return render_template('8-cities_by_states.html', states=sorted_states, cities=sorted_cities)
 
 
 @app.teardown_appcontext
