@@ -1,13 +1,10 @@
+# Create a simple Flask app (__init__.py)
 from flask import Flask
-
-# Create the Flask application instance
 app = Flask(__name__)
 
-# Import routes (URL handlers)
-from . import routes
+@app.route('/')
+def hello():
+    return 'Hello, World!'
 
-# Additional setup and configuration can go here
-# For example, you can set configuration settings, initialize a database, or add extensions.
-
-# Make sure to end the file with a newline
-
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
